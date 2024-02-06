@@ -1,0 +1,20 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+div {
+    text-align: center; /* Center the content inside the div */
+}
+
+.giffy {
+    height: 160px;
+}
+
+.btn-success,
+.btn-danger {
+    padding: 15px 30px; /* Increase padding to make buttons bigger */
+}

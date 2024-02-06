@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Valentines Day</title>
+    <script>
+        // Global variable to store original font size
+        var originalFontSize;
+
+        // Global variable to store the timeout ID for the GIF loop
+        var gifLoopTimeoutId;
+
+        // Function to initialize originalFontSize variable
+        function initializeOriginalFontSize() {
+            var yesButton = document.querySelector('.btn-success');
+            originalFontSize = parseFloat(window.getComputedStyle(yesButton, null).getPropertyValue('font-size'));
+        }
+
+        // Function to increase the size of the "Yes" button and return to normal size when "No" is clicked
+        function changeGifNO() {
+            var h1Element = document.querySelector('h1');
+
+            // Change the text content
+            h1Element.textContent = "Please, may I be your valentine? :(";
+
+            document.querySelector('.giffy').src = 'https://media.tenor.com/XMYjDxrC6xUAAAAj/without.gif'; // Replace 'https://new-gif-url.com' with the new GIF URL
+
+            // Stop the GIF loop
+            clearTimeout(gifLoopTimeoutId);
+
+            // Increase the size of the "Yes" button
+            var yesButton = document.querySelector('.btn-success');
+            yesButton.style.fontSize = (parseFloat(window.getComputedStyle(yesButton, null).getPropertyValue('font-size')) + 2) + 'px'; // Increase font size by 2 pixels
+        }
+
+        // Function to change the GIF when "Yes" is clicked
+        function changeGifYES() {
+            var h1Element = document.querySelector('h1');
+
+            // Change the text content
+            h1Element.textContent = "YAY! I LOVE YOU 🫶";
+
+            var gifContainer = document.querySelector('.giffy');
+            var gifs = [
+                'https://media.tenor.com/u1OqA3bNXyQAAAAM/hi-waving.gif',
+                'https://media.tenor.com/-aW73OVUtyYAAAAj/tkthao219-bubududu.gif',
+                'https://media.tenor.com/0IKwuW91-ZQAAAAj/mimibubu.gif',
+                'https://media.tenor.com/TEC6z0acIbUAAAAj/cute-bears-love.gif'
+            ];
+            var currentIndex = 0;
+
+            function changeNextGif() {
+                gifContainer.src = gifs[currentIndex];
+                currentIndex = (currentIndex + 1) % gifs.length; // Move to the next GIF or loop to the first one if at the end
+
+                // Delay for 2000 milliseconds (2 seconds) before changing to the next GIF
+                gifLoopTimeoutId = setTimeout(changeNextGif, 2000);
+            }
+
+            // Start the loop
+            changeNextGif();
+
+            // Reset the font size of the "Yes" button to the original size
+            var yesButton = document.querySelector('.btn-success');
+            yesButton.style.fontSize = originalFontSize + 'px';
+        }
+    </script>
+</head>
+<body onload="initializeOriginalFontSize()">
+<div>
+    <img src="https://media.tenor.com/uSUkySupnnUAAAAi/tkthao219-bubududu.gif" alt="Grr" class="giffy">
+    <h1>Will you be my valentine?</h1>
+    <button onclick="changeGifYES()" class="btn btn-success">Yes</button>
+    <button onclick="changeGifNO()" class="btn btn-danger">No</button>
+</div>
+</body>
+</html>
